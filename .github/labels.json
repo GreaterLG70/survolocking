@@ -1,0 +1,56 @@
+{
+  "labels": {
+    "type: bug": {
+      "color": "d73a4a",
+      "description": "Bug — 已确认可复现的问题"
+    },
+    "type: feature": {
+      "color": "0e8a16",
+      "description": "新功能请求"
+    },
+    "type: refactor": {
+      "color": "fbca04",
+      "description": "重构（不修 bug、不加功能）"
+    },
+    "type: docs": {
+      "color": "0075ca",
+      "description": "文档改动"
+    },
+    "type: chore": {
+      "color": "cccccc",
+      "description": "构建、依赖、CI 等杂项"
+    },
+    "priority: high": {
+      "color": "b60205",
+      "description": "高优 —— 紧急或阻塞"
+    },
+    "priority: medium": {
+      "color": "d93f0b",
+      "description": "中优 —— 当前迭代内"
+    },
+    "priority: low": {
+      "color": "fef2c0",
+      "description": "低优 —— 后续排期"
+    },
+    "scope: server": {
+      "color": "1d76db",
+      "description": "服务端 / FastAPI"
+    },
+    "scope: android": {
+      "color": "5319e7",
+      "description": "Android 客户端"
+    },
+    "scope: ios": {
+      "color": "c5def5",
+      "description": "iOS 客户端"
+    },
+    "scope: deploy": {
+      "color": "0e8a16",
+      "description": "部署 / 运维"
+    },
+    "needs-review": {
+      "color": "ededed",
+      "description": "需 reviewer 关注"
+    }
+  }
+}

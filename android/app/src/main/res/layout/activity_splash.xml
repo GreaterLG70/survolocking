@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash：全屏深色 + 居中 logo 缩放渐显动画 + 底部小副标题 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash"
+    android:fitsSystemWindows="false">
+
+    <!-- 顶部品牌印记（右上角小字 "survoid.top"），让白屏不空洞 -->
+    <TextView
+        android:id="@+id/tv_brand_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="survoid.top"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp"
+        android:alpha="0.7" />
+
+    <!-- 中心内容：logo + 副标题 + 进度点 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="260dp"
+            android:layout_height="108dp"
+            android:src="@drawable/logo"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/splash_brand_slogan"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:alpha="0.85" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="28dp"
+            android:indeterminateTint="@color/primary" />
+    </LinearLayout>
+
+    <!-- 底部版本 / 版权 -->
+    <TextView
+        android:id="@+id/tv_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:text="Survolocking · v1.0.0"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp"
+        android:alpha="0.55" />
+</FrameLayout>

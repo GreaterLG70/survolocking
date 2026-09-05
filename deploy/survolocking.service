@@ -1,0 +1,31 @@
+[Unit]
+Description=Survolocking API Service
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/survolocking/server
+Environment="PATH=/opt/survolocking/server/.venv/bin"
+EnvironmentFile=/opt/survolocking/server/.env
+
+# 单 worker：定时任务内嵌在应用进程，多 worker 会导致任务重复执行
+ExecStart=/opt/survolocking/server/.venv/bin/uvicorn app.main:app \
+    --host 127.0.0.1 --port 8000 --workers 1
+
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/survolocking/app.log
+StandardError=append:/var/log/survolocking/error.log
+
+# 安全加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/survolocking/server/data
+
+[Install]
+WantedBy=multi-user.target

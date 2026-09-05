@@ -1,0 +1,56 @@
+# 让 Docker 构建上下文保持精简，加速构建、保护构建内网访问
+
+# 源码无关
+.git
+.gitignore
+.gitattributes
+.editorconfig
+.github
+.workbuddy
+README.md
+LICENSE
+CHANGELOG.md
+CONTRIBUTING.md
+SECURITY.md
+docs
+
+# Python
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+server/.venv
+.venv
+venv
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/*.egg-info
+**/*.dist-info
+server/data
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Android / Gradle
+android/.gradle
+android/build
+android/app/build
+android/local.properties
+android/captures
+**/build
+**/*.apk
+**/*.aab
+
+# iOS
+ios/Pods
+ios/build
+ios/.build
+
+# Node
+node_modules
+npm-debug.log
+
+# 部署包
+deploy/survolocking_deploy.tar.gz
+**/*.log

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 8.0 (API 26) 自适应图标。
+     foreground 来自品牌 PNG，background 用品牌底色；
+     Android 系统会按 launcher 形状（圆形/圆角方形/方形/teardrop）自动裁切。 -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>

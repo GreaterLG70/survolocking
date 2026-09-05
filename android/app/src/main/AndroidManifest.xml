@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 来电筛选必需 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <!-- 通讯录白名单：宁可漏接不可误拦的前提 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 通话结束后弹窗标记，需悬浮窗权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 前台服务（Android 14+ 必需声明，否则辅助存活服务启动即崩） -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- dataSync 类型前台服务所需的专属权限（normal 权限，安装即授予） -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <!-- 读取通话记录用于微行为分析（响铃时长统计） -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
+    <!--
+        后台无限制运行（电池优化白名单）。
+        REQUEST_IGNORE_BATTERY_OPTIMIZATIONS 在 Android 6+ 申请豁免；
+        Play 商店审核对此权限敏感，但本项目为自用/隐私工具型，且已在 DataFragment
+        引导用户去系统设置手动开启以避免自动弹窗骚扰。Android 13+ 部分 OEM
+        （如华为、小米）会拦截此 intent，仍需用户去「电池」开关手动打开。
+    -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="true" />
+
+    <application
+        android:name=".SurvolockingApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="true"
+        android:theme="@style/Theme.Survolocking"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        tools:targetApi="34">
+
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Survolocking.Splash"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout|uiMode">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.FamilyActivity"
+            android:exported="false"
+            android:label="@string/title_family" />
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="false"
+            android:label="@string/login_sheet_title" />
+
+        <activity
+            android:name=".ui.MarkActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Survolocking.Transparent"
+            android:launchMode="singleTop" />
+
+        <!-- 核心：来电拦截服务。系统设置中需由用户手动启用 -->
+        <service
+            android:name=".engine.CallScreenService"
+            android:exported="true"
+            android:permission="android.permission.BIND_SCREENING_SERVICE">
+            <intent-filter>
+                <action android:name="android.telecom.CallScreeningService" />
+            </intent-filter>
+        </service>
+
+        <!-- 通话状态监听：采集响铃时长供微行为分析 -->
+        <!-- Android 14+ 必须在 service 元素声明 foregroundServiceType，否则
+             startForeground(..., PHONE_CALL) 会被系统拒绝，前台服务起不来，
+             数秒后进程被 ForegroundServiceDidNotStartInTimeException 杀死（安装即闪退） -->
+        <service
+            android:name=".engine.CallStateMonitorService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <receiver
+            android:name=".engine.CallStateReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

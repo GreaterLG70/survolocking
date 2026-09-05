@@ -1,0 +1,59 @@
+name: Issue · Bug 报告
+description: 报告一个 Bug
+labels: ["type: bug"]
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢报告，请尽量提供完整的复现信息。
+
+  - type: textarea
+    id: what
+    validations:
+      required: true
+    attributes:
+      label: 发生了什么
+      description: 现象描述（清晰的、可复现的步骤）
+      placeholder: |
+        1. 打开 ……
+        2. 点击 ……
+        3. 看到 ……
+        期望：……
+
+  - type: textarea
+    id: reproduce
+    validations:
+      required: true
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. ……
+        2. ……
+
+  - type: input
+    id: version
+    attributes:
+      label: 版本 / Commit
+      placeholder: |
+        v0.2.0 或提交哈希 abc1234
+
+  - type: input
+    id: environment
+    attributes:
+      label: 设备 / 系统 / App 版本
+      placeholder: |
+        Android 13 / Mi 13 / Survolocking v0.2.0
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志 / 截图
+      description: |
+        把崩溃日志贴上来，注意**不要贴 `X-Admin-Token`、手机号、access_token** 等敏感字段。
+
+  - type: input
+    id: priority
+    attributes:
+      label: 严重程度
+      placeholder: high / medium / low

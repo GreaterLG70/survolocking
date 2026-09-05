@@ -1,0 +1,9 @@
+# 项目级 Code Owners，自动指派 reviewer
+# 路径                                          所有者
+/server/app/auth.py                              @GreaterLG70
+/server/app/family.py                            @GreaterLG70
+/server/migrations/                              @GreaterLG70
+/android/app/src/main/kotlin/com/survolocking/engine/   @GreaterLG70
+/android/app/src/main/kotlin/com/survolocking/net/      @GreaterLG70
+/deploy/                                         @GreaterLG70
+/docs/                                           @GreaterLG70

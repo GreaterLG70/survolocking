@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+ 云备份与设备转移规则：排除本地规则库与凭据，避免跨设备数据串扰 -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude
+            domain="database"
+            path="survolocking_rules.db" />
+        <exclude
+            domain="sharedpref"
+            path="survolocking_prefs.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude
+            domain="database"
+            path="survolocking_rules.db" />
+        <exclude
+            domain="sharedpref"
+            path="survolocking_prefs.xml" />
+    </device-transfer>
+</data-extraction-rules>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 小黑盒风格登录主色按钮：青绿渐变 + 按压回弹 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="@color/primary_dark"
+                android:endColor="@color/primary" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="@color/primary"
+                android:endColor="@color/primary_variant" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</selector>

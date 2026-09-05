@@ -1,0 +1,83 @@
+services:
+  app:
+    build:
+      context: ../server
+      dockerfile: ../deploy/Dockerfile
+    container_name: survolocking-app
+    restart: unless-stopped
+    env_file:
+      - ../server/.env
+    environment:
+      # 容器内部通过服务名访问 MySQL / Redis
+      MYSQL_HOST: mysql
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../server/data:/app/data
+    networks:
+      - survolocking
+
+  mysql:
+    image: mysql:8.0
+    container_name: survolocking-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_me_please}
+      MYSQL_DATABASE: survolocking
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+      TZ: Asia/Shanghai
+    command:
+      # 启用原生密码认证，兼容 pymysql
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p${MYSQL_ROOT_PASSWORD:-change_me_please}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - survolocking
+
+  redis:
+    image: redis:7-alpine
+    container_name: survolocking-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redis_data:/data
+    networks:
+      - survolocking
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: survolocking-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/survolocking.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - app
+    networks:
+      - survolocking
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  survolocking:
+    driver: bridge

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tab 文本色：小黑盒风格（未选中=次级文本，选中=青绿主色） -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:color="@color/primary" />
+    <item android:state_activated="true" android:color="@color/primary" />
+    <item android:color="@color/text_secondary" />
+</selector>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 暗色磨砂玻璃主题色板 -->
+    <color name="bg_deep">#070B14</color>
+    <color name="bg_gradient_top">#0E1B2E</color>
+    <color name="bg_gradient_mid">#0B1626</color>
+    <color name="bg_gradient_bottom">#060A12</color>
+
+    <!-- 玻璃表面（半透明） -->
+    <color name="glass">#1AFFFFFF</color>          <!-- 10% 白 -->
+    <color name="glass_strong">#26FFFFFF</color>   <!-- 15% 白 -->
+    <color name="glass_weak">#0DFFFFFF</color>     <!-- 5% 白 -->
+    <color name="glass_stroke">#33FFFFFF</color>   <!-- 20% 白描边 -->
+    <color name="glass_stroke_strong">#4DFFFFFF</color>
+
+    <!-- 主色：青绿（科技 / 防护感） -->
+    <color name="primary">#34D9C4</color>
+    <color name="primary_dark">#0F766E</color>
+    <color name="primary_variant">#5EEAD4</color>
+    <color name="accent">#F5A623</color>
+
+    <!-- 文本 -->
+    <color name="text_primary">#ECF2F7</color>
+    <color name="text_secondary">#95A4B3</color>
+    <color name="text_on_primary">#04201C</color>
+
+    <!-- 状态 -->
+    <color name="danger">#FF7A7A</color>
+    <color name="success">#5BE584</color>
+    <color name="warning">#F5C451</color>
+
+    <!-- 兼容旧引用（保留） -->
+    <color name="surface">#121A28</color>
+    <color name="background">#070B14</color>
+    <color name="divider">#1E2A3A</color>
+    <color name="ic_launcher_background">#0F766E</color>
+</resources>
