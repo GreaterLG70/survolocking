@@ -36,9 +36,9 @@ LICENSE         text eol=lf
 
 # 脚本
 *.sh            text eol=lf
-*.bat           text eol=lf
+*.bat           text eol=crlf
 gradlew         text eol=lf
-gradlew.bat     text eol=lf
+gradlew.bat     text eol=crlf
 
 # 模板不应归并冲突
 gradle/wrapper/gradle-wrapper.jar  binary
